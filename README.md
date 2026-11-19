@@ -1,3 +1,8 @@
+[![make.fun · gta6-meme-x-01](https://make.fun/badge/gta6-meme-x-01.svg)](https://make.fun/bounty/gta6-meme-x-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-meme-x-01)
+[![rank](https://make.fun/badge/gta6-meme-x-01/Abdul99090/gta6-meme-x-wanted/rank.svg)](https://make.fun/bounty/gta6-meme-x-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-meme-x-01)
+[![reward](https://make.fun/badge/gta6-meme-x-01/Abdul99090/gta6-meme-x-wanted/reward.svg)](https://make.fun/bounty/gta6-meme-x-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-meme-x-01)
+Entry for make.fun's "Post a GTA 6 meme on X" bounty: https://make.fun/bounty/gta6-meme-x-01
+
 # WANTED — a GTA 6 meme for make.fun
 
 The joke: GTA VI is finally out, and the make.fun ghost is already a wanted
