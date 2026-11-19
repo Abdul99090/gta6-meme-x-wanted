@@ -17,7 +17,31 @@ const BOT_DIR = process.env.MAKEFUN_BOT_DIR ?? '/bot';
 const OUTPUT_DIR = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 
 const POST_PATH = join(BOT_DIR, 'POST.json');
-const STATUS_RE = /^https:\/\/x\.com\/[A-Za-z0-9_]+\/status\/\d+$/;
+
+// A real X status address: https only, no credentials/port/query/fragment,
+// host exactly x.com or twitter.com once the standard www./mobile. prefix is
+// stripped (so x.com.evil.com, evilx.com and x.com@evil.com all fail), and a
+// /<handle>/status/<digits> path whose status id is all digits.
+function isStatusUrl(raw: string): boolean {
+  let u: URL;
+  try {
+    u = new URL(raw);
+  } catch {
+    return false;
+  }
+  if (u.protocol !== 'https:') return false;
+  if (u.username || u.password || u.port || u.search || u.hash) return false;
+  const host = u.hostname.replace(/^(?:www\.|mobile\.)/, '');
+  if (host !== 'x.com' && host !== 'twitter.com') return false;
+  const seg = u.pathname.split('/');
+  return (
+    seg.length === 4 &&
+    seg[0] === '' &&
+    /^[A-Za-z0-9_]+$/.test(seg[1]) &&
+    seg[2] === 'status' &&
+    /^\d+$/.test(seg[3])
+  );
+}
 
 let post: unknown;
 try {
@@ -31,7 +55,7 @@ if (
   typeof post !== 'object' ||
   post === null ||
   typeof (post as { url?: unknown }).url !== 'string' ||
-  !STATUS_RE.test((post as { url: string }).url)
+  !isStatusUrl((post as { url: string }).url)
 ) {
   console.error('POST.json must name an X post address, e.g. {"url": "https://x.com/<handle>/status/<id>"}');
   process.exit(1);
